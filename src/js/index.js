@@ -1,4 +1,4 @@
-import '../styles/index.scss';
+import '../scss/index.scss';
 
 import Dataset from './tf-blurriness/data';
 import train from './tf-blurriness/core/train';
