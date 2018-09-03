@@ -1,4 +1,8 @@
-/node_modules/
+# Dotfiles
 .cache/
-/dist/
+.vscode/
 **.DS_Store
+
+# Build stuff
+/node_modules/
+/dist/
