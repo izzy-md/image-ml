@@ -1,0 +1,54 @@
+@keyframes loading {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 60px;
+      width: 60px;
+      border: 5px solid #ddd;
+      border-top-color: #08c;
+      border-radius: 100%;
+      animation: loading 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+      transition: opacity 0.15s;
+      will-change: transform;
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      height: 24px;
+      width: 12px;
+      border-right: 4px solid #0c8;
+      border-bottom: 4px solid #0c8;
+      transform: rotate(37deg) translate3d(-2px, -2px, 0);
+      transition: opacity 0.15s;
+      opacity: 0;
+    }
+
+    &.loaded {
+      &:before {
+        opacity: 0;
+        animation-play-state: paused;
+      }
+
+      &:after {
+        opacity: 1;
+      }
+    }
+  }

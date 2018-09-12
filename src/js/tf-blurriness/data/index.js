@@ -57,7 +57,7 @@ export default class GeneralDataset {
         return (async () => {
             let images = await this.getImageList();
 
-            return Promise.all(images.map(await this.constructor.loadImage.bind(this)));
+            return await Promise.all(images.map(await this.constructor.loadImage.bind(this)));
         })();
     }
 }

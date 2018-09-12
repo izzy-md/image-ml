@@ -4,8 +4,8 @@ const config = {
         height: 200
     },
     learning: 0.15,
-    trainingSize: 64,
-    validatingSize: 64,
+    trainingSize: 8,
+    validatingSize: 8,
 };
 
 export default config;

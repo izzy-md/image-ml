@@ -1,21 +1,15 @@
 import arrayShuffle from './arrayShuffle';
 
-export default function(arr, ...sizes){
-    if(sizes.reduce((t, c) => t += c, 0) >= arr.length){
+export default function(arr, size1, size2){
+    if(arr.length < size1 + size2){
         throw Error('Total of the sizes cannot be larger than the array length');
     }
-    
+
     let shuffled = arrayShuffle(arr);
     let randomised = [];
-    let previous = 0;
-    
-    for(let size of sizes){
-        if(sizes.hasOwnProperty(size)){
-            randomised.push(shuffled.slice(previous, size));
-            
-            previous = size;
-        }
-    }
-    
+
+    randomised.push(shuffled.slice(0, size1));
+    randomised.push(shuffled.slice(size1, size1 + size2));
+
     return randomised;
 }

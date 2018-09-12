@@ -13,7 +13,7 @@ const trainData = async data => {
     // tf.nextFrame() returns a promise that resolves at the next call to
     // requestAnimationFrame(). By awaiting this promise we keep our model
     // training from blocking the main UI thread and freezing the browser.
-    await tf.nextFrame();
+    return await tf.nextFrame();
 };
 
 const validateData = async data => {
@@ -26,7 +26,7 @@ const validateData = async data => {
     // tf.nextFrame() returns a promise that resolves at the next call to
     // requestAnimationFrame(). By awaiting this promise we keep our model
     // training from blocking the main UI thread and freezing the browser.
-    await tf.nextFrame();
+    return await tf.nextFrame();
 }
 
 export default async function(data) {
@@ -38,11 +38,11 @@ export default async function(data) {
 
     // Train the model
     console.log('Currently training the model, please wait');
-    await Promise.all(chunkedTrainingData.map(trainData));
+    await Promise.all(chunkedTrainingData.map(await trainData));
     console.log('Finished training the model');
 
     // Test the model
     console.log('Currently testing the model, please wait');
-    await Promise.all(chunkedValidatingData.map(validateData));
+    // await Promise.all(chunkedValidatingData.map(validateData));
     console.log('Finished testing the model');
 }
