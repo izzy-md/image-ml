@@ -6,3 +6,9 @@
 # Build stuff
 /node_modules/
 /dist/
+
+# Dataset
+/CERTH_ImageBlurDataset/
+/dataset/EvaluationSet/
+/dataset/TrainingSet/
+/dataset/set/

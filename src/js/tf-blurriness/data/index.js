@@ -1,16 +1,21 @@
 export default class GeneralDataset {
-    constructor(url){
-        this.url = url;
+    constructor(dataset){
+        this.dataset = dataset;
     }
 
     async getImageList(){
+        // If it's already json!
+        if(this.dataset instanceof Array){
+            return this.dataset;
+        }
+
         // Json file with an array of urls
         // url should contain the word blur if it is
         // blurry for this usecase
         return await fetch(this.url).then(res => res.json());
     }
 
-    static async drawImage(image){
+    static drawImage(image){
         let canvas = document.createElement('canvas');
 
         canvas.width = image.width;
@@ -29,9 +34,9 @@ export default class GeneralDataset {
             image.crossOrigin = '';
             image.src = url;
 
-            image.addEventListener('load', e => {
+            const listener = async e => {
                 try {
-                    let context = this.drawImage(image);
+                    let context = await this.constructor.drawImage(image);
 
                     resolve({
                         imageData: context.getImageData(0, 0, image.width, image.height),
@@ -40,7 +45,11 @@ export default class GeneralDataset {
                 } catch(e) {
                     reject(e);
                 }
-            });
+            };
+
+            listener.bind(this);
+
+            image.addEventListener('load', listener);
         });
     }
 
@@ -48,7 +57,7 @@ export default class GeneralDataset {
         return (async () => {
             let images = await this.getImageList();
 
-            return images.map(await this.constructor.loadImage);
+            return Promise.all(images.map(await this.constructor.loadImage.bind(this)));
         })();
     }
 }
