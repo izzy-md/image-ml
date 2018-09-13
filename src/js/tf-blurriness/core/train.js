@@ -1,3 +1,5 @@
+import * as tf from '@tensorflow/tfjs';
+
 import arrayRandomiser from '../utils/arrayRandomiser';
 
 import config from '../config';

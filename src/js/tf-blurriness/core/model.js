@@ -1,3 +1,5 @@
+import * as tf from '@tensorflow/tfjs';
+
 import config from "../config";
 
 const model = tf.sequential();
