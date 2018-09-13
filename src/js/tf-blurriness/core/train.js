@@ -45,6 +45,6 @@ export default async function(data) {
 
     // Test the model
     console.log('Currently testing the model, please wait');
-    // await Promise.all(chunkedValidatingData.map(validateData));
+    await Promise.all(chunkedValidatingData.map(await validateData));
     console.log('Finished testing the model');
 }
